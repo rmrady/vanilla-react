@@ -1,0 +1,7 @@
+.back-clip{
+    clip-path: polygon(100% 40%, 100% 0%, 0% 0%, 0% 80% );
+    background: linear-gradient(45deg, #b4e5e8 0%, #e5d5b4 22%, #aec8f0 49%, #d186ed 75%, #ca5dee 100%); 
+}
+#elemnt1, #elemnt2 , #elemnt3{
+    transition: all 1000ms ease 0s;
+}
