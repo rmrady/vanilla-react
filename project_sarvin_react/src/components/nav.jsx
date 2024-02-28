@@ -6,7 +6,7 @@ import { Shopcontext } from '../context/shopcont';
 
 function Nav() {
   const {cartitem} = useContext(Shopcontext);
-  const itemCount =cartitem.reduce((prev, current)=>{
+  const itemCount =cartitem?.reduce((prev, current)=>{
     return prev + current.count
   },0)
   return (

@@ -1,9 +1,20 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const Shopcontext = createContext(null);
 
 export const Shopcontextprovider = (props)=>{
-    const [cartitem, setCartitem] = useState([]);
+    const [cartitem, setCartitem] = useState();
+    useEffect(()=>{
+        const data = localStorage.getItem("raziehStylecodding")
+        setCartitem(!!JSON.parse(data) ? JSON.parse(data): [] )
+    },[])
+
+    useEffect(()=>{
+        if(cartitem !== undefined)
+        localStorage.setItem("raziehStylecodding", JSON.stringify(cartitem))
+    },[cartitem])
+
+
     const addtocart =(itemId)=>{
         if(!cartitem?.find((item)=> item.id == itemId))
             setCartitem([...cartitem, {id : itemId, count: 1}])
@@ -24,7 +35,12 @@ export const Shopcontextprovider = (props)=>{
         else return i
         }))
     }
+    
+    const resetcort = ()=>{
+        setCartitem();
+        localStorage.removeItem("raziehStylecodding")
+    }
 
-    const contextvalue ={cartitem , addtocart,removecart}
+    const contextvalue ={cartitem , addtocart,removecart,resetcort}
     return <Shopcontext.Provider value={contextvalue}>{props.children}</Shopcontext.Provider>
 }
